@@ -1,0 +1,44 @@
+https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json
+	proton_speed: km/s
+	proton_density: cm^3
+	
+https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json
+    bt: total strength of the interplanetary magnetic field: gsm
+	
+https://services.swpc.noaa.gov/json/goes/primary/integral-electrons-6-hour.json
+    Values for:
+		>=2 MeV
+		
+		
+		Flux:  integral electron flux (electrons/(cm2 s sr))
+		
+https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json'
+	Values for:
+		>=1 MeV
+		>=5 Mev
+		>=10 MeV
+		>=30 MeV
+		>=50 MeV
+		>=60 MeV
+		>=100MeV
+		>=500 MeV
+		
+		
+		Flux: integral proton flux (protons/cm2-s-sr)
+		
+https://services.swpc.noaa.gov/json/goes/primary/magnetometers-6-hour.json
+	
+	Hp:  magnetic field vector component, points northward, perpendicular to the orbit plane which for a zero degree inclination orbit is parallel to Earth's spin axis.
+		NanoTesla (nT)
+
+https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json
+
+	Values for:
+		0.1-0.8nm
+		0.05-0.4nm
+		
+	Flux: Watts per m^2
+	
+Data for Grid squares 
+	- PSKReporter
+	
