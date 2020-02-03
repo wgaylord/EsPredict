@@ -114,7 +114,7 @@ def CollectData():
     ses.add(SpaceWeatherReport(RecordedTime=now,ProtonSpeed=proton_speed,ProtonDensity=proton_density,ProtonTemperature=proton_temperature,InterplanetaryMagneticFieldStrength=bt,IntegralElectrons=electronFlux,IntegralProtons1MeV=mev1,IntegralProtons5MeV=mev5,IntegralProtons10MeV=mev10,IntegralProtons30MeV=mev30,IntegralProtons50MeV=mev50,IntegralProtons60MeV=mev60,IntegralProtons100MeV=mev100,IntegralProtons500MeV=mev500,MagneticFieldStrength=Hp,Xrays8=xray8,Xrays4=xrays4))
     ses.commit()
     
-scheduler.add_job(CollectData,'interval',minutes=15):
+scheduler.add_job(CollectData,'interval',minutes=15)
 
 
 try:
