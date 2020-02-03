@@ -41,4 +41,6 @@ https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json
 	
 Data for Grid squares 
 	- PSKReporter
+	https://retrieve.pskreporter.info/query?noactive=1&rronly=1&flowStartSeconds=900&frange=50000000-51000000
+	Get all 6m propgation. 
 	
