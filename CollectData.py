@@ -105,7 +105,7 @@ def CollectData():
     GoesMagData = requests.get(GOESMagenticURL).json()[-4:]
     Hp = 0
     for x in GoesMagData:
-        Hp += Hp["Hp"]
+        Hp += x["Hp"]
     Hp = Hp/4
     
     GoesXray = requests.get(GOESXray).json()[-4:]
