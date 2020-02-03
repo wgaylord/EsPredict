@@ -66,7 +66,7 @@ ses = Session()
 
 def CollectData():
     now = int(time.time())
-    pskReportData = ElementTree.fromstring(requests.get(PSKReporterURL).text))
+    pskReportData = ElementTree.fromstring(requests.get(PSKReporterURL).text)
     reports = pskReportData.getchildren()[2:]
     for x in reports:
         ses.add(ReceptionReport(RecordedTime=now,ReportedTime=int(x["flowStartSeconds"]),ReceiverCallsign=x["receiverCallsign"],SenderCallsign=x["senderCallsign"],ReceiverLocator=x["receiverLocator"],SenderLocator=x["senderLocator"],Mode=x["mode"],Frequency=x["frequency"]))
