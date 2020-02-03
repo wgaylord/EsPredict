@@ -116,7 +116,7 @@ def CollectData():
     ses.commit()
     
 scheduler.add_job(CollectData,'interval',minutes=15)
-
+CollectData()
 
 try:
     scheduler.start()
