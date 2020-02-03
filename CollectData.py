@@ -65,6 +65,7 @@ Session = sessionmaker(bind=eng)
 ses = Session()    
 
 def CollectData():
+    print("Collecting Data at "+ time.ctime())
     now = int(time.time())
     pskReportData = ElementTree.fromstring(requests.get(PSKReporterURL).text)
     reports = pskReportData.getchildren()[2:]
