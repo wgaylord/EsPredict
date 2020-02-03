@@ -68,9 +68,9 @@ def CollectData():
     print("Collecting Data at "+ time.ctime())
     now = int(time.time())
     pskReportData = ElementTree.fromstring(requests.get(PSKReporterURL).text)
-    reports = pskReportData.getchildren()[2:]
+    reports = list(pskReportData)[2:]
     for x in reports:
-        ses.add(ReceptionReport(RecordedTime=now,ReportedTime=int(x["flowStartSeconds"]),ReceiverCallsign=x["receiverCallsign"],SenderCallsign=x["senderCallsign"],ReceiverLocator=x["receiverLocator"],SenderLocator=x["senderLocator"],Mode=x["mode"],Frequency=x["frequency"]))
+        ses.add(ReceptionReport(RecordedTime=now,ReportedTime=int(x.get("flowStartSeconds")),ReceiverCallsign=x.get("receiverCallsign"),SenderCallsign=x.get("senderCallsign"),ReceiverLocator=x.get("receiverLocator"),SenderLocator=x.get("senderLocator"),Mode=x.get("mode"),Frequency=x.get("frequency")))
     
     rtswProtonData = requests.get(RTSWProtonURL).json()[:15]
     proton_speed = 0
