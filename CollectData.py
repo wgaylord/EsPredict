@@ -109,8 +109,8 @@ def CollectData():
     Hp = Hp/4
     
     GoesXray = requests.get(GOESXray).json()[-4:]
-    xray4 = (GoesXray[0] + GoesXray[2])/2
-    xray8 = (GoesXray[1] + GoesXray[3])/2
+    xray4 = (GoesXray[0]["flux"] + GoesXray[2]["flux"])/2
+    xray8 = (GoesXray[1]["flux"] + GoesXray[3]["flux"])/2
     
     ses.add(SpaceWeatherReport(RecordedTime=now,ProtonSpeed=proton_speed,ProtonDensity=proton_density,ProtonTemperature=proton_temperature,InterplanetaryMagneticFieldStrength=bt,IntegralElectrons=electronFlux,IntegralProtons1MeV=mev1,IntegralProtons5MeV=mev5,IntegralProtons10MeV=mev10,IntegralProtons30MeV=mev30,IntegralProtons50MeV=mev50,IntegralProtons60MeV=mev60,IntegralProtons100MeV=mev100,IntegralProtons500MeV=mev500,MagneticFieldStrength=Hp,Xrays8=xray8,Xrays4=xrays4))
     ses.commit()
