@@ -90,7 +90,7 @@ def CollectData():
         bt += x["bt"]
     bt = bt/15
     
-    electronFlux = reuqests.get(GOESElectronURL).json()[-1]["flux"]
+    electronFlux = requests.get(GOESElectronURL).json()[-1]["flux"]
     
     protonFluxData = requests.get(GOESProtonURL).json()[-32:]
     mev1 = (protonFluxData[0]["flux"] + protonFluxData[8]["flux"] + protonFluxData[16]["flux"] + protonFluxData[24]["flux"])/4
