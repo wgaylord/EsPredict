@@ -72,23 +72,24 @@ def CollectData():
     for x in reports:
         ses.add(ReceptionReport(RecordedTime=now,ReportedTime=int(x.get("flowStartSeconds")),ReceiverCallsign=x.get("receiverCallsign"),SenderCallsign=x.get("senderCallsign"),ReceiverLocator=x.get("receiverLocator"),SenderLocator=x.get("senderLocator"),Mode=x.get("mode"),Frequency=x.get("frequency")))
     
-    rtswProtonData = requests.get(RTSWProtonURL).json()[:15]
-    proton_speed = 0
-    proton_density = 0
-    proton_temperature = 0
+    rtswProtonData = requests.get(RTSWProtonURL).json()
+    proton_speed = None
+    proton_density = None
+    proton_temperature = None
     for x in rtswProtonData:
-        proton_speed += x["proton_speed"]
-        proton_density += x["proton_density"]
-        proton_temperature += x["proton_temperature"]
-    proton_speed = proton_speed/15
-    proton_density = proton_density/15
-    proton_temperature = proton_temperature/15
+        proton_speed = x["proton_speed"]
+        proton_density = x["proton_density"]
+        proton_temperature = x["proton_temperature"]
+        if (not proton_speed == None) and (not proton_density == None) and (not proton_temperature == None):
+            break
     
-    rtswMagData = requests.get(RTSWMagneticURL).json()[:15]
-    bt = 0
-    for x in rtswMagData:
-        bt += x["bt"]
-    bt = bt/15
+    rtswMagData = requests.get(RTSWMagneticURL).json()
+    bt = rtswMagData[0]["bt"]
+    temp = 1
+    while bt == None:
+        bt = x[temp]["bt"]
+        
+        
     
     electronFlux = requests.get(GOESElectronURL).json()[-1]["flux"]
     
@@ -112,7 +113,7 @@ def CollectData():
     xray4 = (GoesXray[0]["flux"] + GoesXray[2]["flux"])/2
     xray8 = (GoesXray[1]["flux"] + GoesXray[3]["flux"])/2
     
-    ses.add(SpaceWeatherReport(RecordedTime=now,ProtonSpeed=proton_speed,ProtonDensity=proton_density,ProtonTemperature=proton_temperature,InterplanetaryMagneticFieldStrength=bt,IntegralElectrons=electronFlux,IntegralProtons1MeV=mev1,IntegralProtons5MeV=mev5,IntegralProtons10MeV=mev10,IntegralProtons30MeV=mev30,IntegralProtons50MeV=mev50,IntegralProtons60MeV=mev60,IntegralProtons100MeV=mev100,IntegralProtons500MeV=mev500,MagneticFieldStrength=Hp,Xrays8=xray8,Xrays4=xrays4))
+    ses.add(SpaceWeatherReport(RecordedTime=now,ProtonSpeed=proton_speed,ProtonDensity=proton_density,ProtonTemperature=proton_temperature,InterplanetaryMagneticFieldStrength=bt,IntegralElectrons=electronFlux,IntegralProtons1MeV=mev1,IntegralProtons5MeV=mev5,IntegralProtons10MeV=mev10,IntegralProtons30MeV=mev30,IntegralProtons50MeV=mev50,IntegralProtons60MeV=mev60,IntegralProtons100MeV=mev100,IntegralProtons500MeV=mev500,MagneticFieldStrength=Hp,Xrays8=xray8,Xrays4=xray4))
     ses.commit()
     
 scheduler.add_job(CollectData,'interval',minutes=15)
