@@ -10,7 +10,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 import time
 from xml.etree import ElementTree
 
-PSKReporterURL = "https://retrieve.pskreporter.info/query?noactive=1&rronly=1&flowStartSeconds=900&frange=50000000-51000000&appcontact=chibill110@gmail.com"
+PSKReporterURL = "https://retrieve.pskreporter.info/query?noactive=1&rronly=1&flowStartSeconds=-900&frange=50000000-51000000&appcontact=chibill110@gmail.com"
 RTSWProtonURL =  "https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json"
 RTSWMagneticURL = "https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json"
 GOESElectronURL = "https://services.swpc.noaa.gov/json/goes/primary/integral-electrons-6-hour.json"
@@ -62,7 +62,9 @@ class SpaceWeatherReport(Base):
 
     
 Session = sessionmaker(bind=eng)
-ses = Session()    
+ses = Session()  
+Base.metadata.create_all(eng)
+  
 
 def CollectData():
     print("Collecting Data at "+ time.ctime())
